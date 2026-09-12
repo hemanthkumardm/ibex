@@ -1,0 +1,282 @@
+=== OpenLane env ===
+PDK_ROOT=/pdk PDK=sky130A UNTIL=all OVERWRITE=1
+/root/.nix-profile/bin/flow.tcl
+total 16
+drwxr-xr-x 3 root root 4096 Sep 12 10:41 .
+drwxr-xr-x 3 root root 4096 Sep 12 10:41 ..
+-rw-r--r-- 1 root root 1219 Sep 12 10:41 config.json
+drwxr-xr-x 2 root root 4096 Sep 12 10:41 src
+total 448
+drwxr-xr-x 2 root root   4096 Sep 12 10:41 .
+drwxr-xr-x 3 root root   4096 Sep 12 10:41 ..
+-rw-r--r-- 1 root root   2765 Sep 12 10:41 ibex_core.sdc
+-rw-r--r-- 1 root root 445057 Sep 12 10:41 ibex_core.v
+OpenLane v1.1.1 ()
+All rights reserved. (c) 2020-2024 Efabless Corporation and contributors.
+Available under the Apache License, version 2.0. See the LICENSE file for more details.
+
+ACE-Seek OpenLane stage runner: until=all overwrite=1 design=/openlane/designs/ace_design tag=ace_run
+ACE-Seek: prep (fresh/overwrite) → /openlane/designs/ace_design/runs/ace_run
+[INFO]: Using configuration in 'config.json'...
+[INFO]: Process Design Kit: sky130A
+[INFO]: PDK Root: /pdk
+[INFO]: Standard Cell Library: sky130_fd_sc_hd
+[INFO]: Optimization Standard Cell Library: sky130_fd_sc_hd
+[INFO]: Run Directory: /openlane/designs/ace_design/runs/ace_run
+[WARNING]: DIODE_INSERTION_STRATEGY is now deprecated; use GRT_REPAIR_ANTENNAS, DIODE_ON_PORTS and RUN_HEURISTIC_DIODE_INSERTION instead.
+[INFO]: DIODE_INSERTION_STRATEGY set to 3. Setting GRT_REPAIR_ANTENNAS to 1
+[INFO]: Saving runtime environment...
+[INFO]: Preparing LEF files for the nom corner...
+[INFO]: Preparing LEF files for the min corner...
+[INFO]: Preparing LEF files for the max corner...
+ACE-Seek: until=all rank=99 skip_synth=0 external_synth=0 skip_fp=0 skip_place=0 skip_cts=0 skip_route=0
+ACE-Seek: === step synthesis ===
+[STEP 1]
+[INFO]: Running Synthesis (log: runs/ace_run/logs/synthesis/1-synthesis.log)...
+[STEP 2]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/synthesis/2-sta.log)...
+ACE-Seek: === step synthesis OK ===
+ACE-Seek: rewind for floorplan — CURRENT_NETLIST: /openlane/designs/ace_design/runs/ace_run/results/synthesis/ibex_core.v → /openlane/designs/ace_design/runs/ace_run/results/synthesis/ibex_core.v
+ACE-Seek: clearing CURRENT_DEF (was 0)
+ACE-Seek: clearing CURRENT_ODB (was 0)
+ACE-Seek: clearing CURRENT_GUIDE (was 0)
+ACE-Seek: clearing CURRENT_POWERED_NETLIST (was 0)
+ACE-Seek: clearing CURRENT_SDC (was /openlane/designs/ace_design/src/ibex_core.sdc)
+ACE-Seek: clearing CURRENT_SDF (was /openlane/designs/ace_design/runs/ace_run/results/synthesis/ibex_core.sdf)
+ACE-Seek: clearing CURRENT_LIB (was /openlane/designs/ace_design/runs/ace_run/results/synthesis/ibex_core.lib)
+ACE-Seek: reset CURRENT_INDEX 2 → 2
+ACE-Seek: WARNING — no pin_order.cfg found; IO placer may put all pins on one edge
+ACE-Seek: PDN rings ON multilayer=1 Vw=1.6 Hw=1.6 Voff=6 Hoff=6
+ACE-Seek: === step floorplan ===
+[STEP 3]
+[INFO]: Running Initial Floorplanning (log: runs/ace_run/logs/floorplan/3-initial_fp.log)...
+[INFO]: Floorplanned with width 553.84 and height 552.16.
+[STEP 4]
+[INFO]: Running IO Placement (log: runs/ace_run/logs/floorplan/4-io.log)...
+[STEP 5]
+[INFO]: Running Tap/Decap Insertion (log: runs/ace_run/logs/floorplan/5-tap.log)...
+[INFO]: Power planning with power {VPWR} and ground {VGND}...
+[STEP 6]
+[INFO]: Generating PDN (log: runs/ace_run/logs/floorplan/6-pdn.log)...
+ACE-Seek: === step floorplan OK ===
+ACE-Seek: === step placement ===
+[STEP 7]
+[INFO]: Running Global Placement (skip_io) (log: runs/ace_run/logs/placement/6-global_skip_io.log)...
+[STEP 8]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/placement/8-gpl_sta.log)...
+[STEP 9]
+[INFO]: Running IO Placement (log: runs/ace_run/logs/placement/9-io.log)...
+[STEP 10]
+[INFO]: Running Global Placement (log: runs/ace_run/logs/placement/9-global.log)...
+[STEP 11]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/placement/11-gpl_sta.log)...
+[STEP 12]
+[INFO]: Running Placement Resizer Design Optimizations (log: runs/ace_run/logs/placement/12-resizer.log)...
+[STEP 13]
+[INFO]: Running Detailed Placement (log: runs/ace_run/logs/placement/13-detailed.log)...
+[STEP 14]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/placement/14-dpl_sta.log)...
+ACE-Seek: === step placement OK ===
+ACE-Seek: === step placement_reports ===
+[STEP 15]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/placement/15-ace_post_place_sta.log)...
+ACE-Seek: === step placement_reports OK ===
+ACE-Seek: wrote /openlane/results_out/placement_timing_bundle.rpt
+ACE-Seek: wrote /openlane/results_out/placement_power_bundle.rpt
+ACE-Seek: wrote /openlane/results_out/placement_area_util.rpt
+ACE-Seek: wrote /openlane/results_out/placement_metrics_summary.rpt
+ACE-Seek: === placement metrics summary ===
+Design area 128125 u^2 42% utilization.
+Design area 127585 u^2 42% utilization.
+Design area 127585 u^2 42% utilization.
+Design area 127585 u^2 42% utilization.
+Design area 128125 u^2 42% utilization.
+ACE-Seek: === end placement metrics ===
+ACE-Seek: === step cts ===
+[STEP 16]
+[INFO]: Running Clock Tree Synthesis (log: runs/ace_run/logs/cts/16-cts.log)...
+[STEP 17]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/cts/17-cts_sta.log)...
+ACE-Seek: === step cts OK ===
+ACE-Seek: === step routing ===
+[STEP 18]
+[INFO]: Running Global Routing Resizer Design Optimizations (log: runs/ace_run/logs/routing/18-resizer_design.log)...
+[STEP 19]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/routing/19-rsz_design_sta.log)...
+[STEP 20]
+[INFO]: Running Global Routing Resizer Timing Optimizations (log: runs/ace_run/logs/routing/20-resizer_timing.log)...
+[STEP 21]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/routing/21-rsz_timing_sta.log)...
+[STEP 22]
+[INFO]: Running Global Routing (log: runs/ace_run/logs/routing/22-global.log)...
+[STEP 23]
+[INFO]: Writing Verilog (log: runs/ace_run/logs/routing/22-global_write_netlist.log)...
+[STEP 24]
+[INFO]: Running Single-Corner Static Timing Analysis (log: runs/ace_run/logs/routing/24-grt_sta.log)...
+[STEP 25]
+[INFO]: Running Fill Insertion (log: runs/ace_run/logs/routing/25-fill.log)...
+[STEP 26]
+[INFO]: Running Detailed Routing (log: runs/ace_run/logs/routing/26-detailed.log)...
+[STEP 27]
+[INFO]: Checking Wire Lengths (log: runs/ace_run/logs/routing/27-wire_lengths.log)...
+ACE-Seek: === step routing OK ===
+[STEP 28]
+[INFO]: Running SPEF Extraction at the min process corner (log: runs/ace_run/logs/signoff/28-parasitics_extraction.min.log)...
+[STEP 29]
+[INFO]: Running Multi-Corner Static Timing Analysis at the min process corner (log: runs/ace_run/logs/signoff/29-rcx_mcsta.min.log)...
+[STEP 30]
+[INFO]: Running SPEF Extraction at the max process corner (log: runs/ace_run/logs/signoff/30-parasitics_extraction.max.log)...
+[STEP 31]
+[INFO]: Running Multi-Corner Static Timing Analysis at the max process corner (log: runs/ace_run/logs/signoff/31-rcx_mcsta.max.log)...
+[STEP 32]
+[INFO]: Running SPEF Extraction at the nom process corner (log: runs/ace_run/logs/signoff/32-parasitics_extraction.nom.log)...
+[STEP 33]
+[INFO]: Running Multi-Corner Static Timing Analysis at the nom process corner (log: runs/ace_run/logs/signoff/33-rcx_mcsta.nom.log)...
+[WARNING]: VSRC_LOC_FILES was not given a value, which may make the results of IR drop analysis inaccurate. If you are not integrating a top-level chip for manufacture, you may ignore this warning, otherwise, see the documentation for VSRC_LOC_FILES.
+[STEP 34]
+[INFO]: Creating IR Drop Report (log: runs/ace_run/logs/signoff/34-irdrop.log)...
+ACE-Seek: === step gds_magic ===
+[STEP 35]
+[INFO]: Running Magic to generate various views...
+[INFO]: Streaming out GDSII with Magic (log: runs/ace_run/logs/signoff/35-gdsii.log)...
+[INFO]: Generating MAGLEF views...
+[INFO]: Generating lef with Magic (/openlane/designs/ace_design/runs/ace_run/logs/signoff/35-lef.log)...
+ACE-Seek: === step gds_magic OK ===
+[STEP 36]
+[INFO]: Streaming out GDSII with KLayout (log: runs/ace_run/logs/signoff/36-gdsii-klayout.log)...
+[STEP 37]
+[INFO]: Running Magic Spice Export from GDS (log: runs/ace_run/logs/signoff/37-gds.spice.log)...
+[STEP 38]
+[INFO]: Writing Powered Verilog (logs: runs/ace_run/logs/signoff/38-write_powered_def.log, runs/ace_run/logs/signoff/38-write_powered_verilog.log)...
+[STEP 39]
+[INFO]: Writing Verilog (log: runs/ace_run/logs/signoff/38-write_powered_verilog.log)...
+[STEP 40]
+[INFO]: Running LVS (log: runs/ace_run/logs/signoff/40-lvs.gds.log)...
+[INFO]: Saving current set of views in 'runs/ace_run/results/final'...
+[INFO]: Saving runtime environment...
+ACE-Seek: flow complete (until=all)
+RUN_DIR=runs/ace_run
+total 36
+drwxr-xr-x  9 root root 4096 Sep 12 11:43 .
+drwxr-xr-x  6 root root 4096 Sep 12 11:43 ..
+drwxr-xr-x  2 root root 4096 Sep 12 10:45 cts
+drwxr-xr-x 13 root root 4096 Sep 12 11:43 final
+drwxr-xr-x  2 root root 4096 Sep 12 10:44 floorplan
+drwxr-xr-x  2 root root 4096 Sep 12 10:45 placement
+drwxr-xr-x  3 root root 4096 Sep 12 11:37 routing
+drwxr-xr-x  2 root root 4096 Sep 12 11:43 signoff
+drwxr-xr-x  2 root root 4096 Sep 12 10:44 synthesis
+total 8
+drwxr-xr-x 2 root root 4096 Sep 12 10:41 .
+drwxr-xr-x 8 root root 4096 Sep 12 10:41 ..
+total 307544
+drwxr-xr-x 2 root root     4096 Sep 12 11:44 .
+drwxr-xr-x 4 root root     4096 Sep 12 10:41 ..
+-rw-r--r-- 1 root root       13 Sep 12 11:44 RUN_DIR.txt
+-rw-r--r-- 1 root root  2790839 Sep 12 11:43 cts_ibex_core.def
+-rw-r--r-- 1 root root  9385454 Sep 12 11:43 cts_ibex_core.odb
+-rw-r--r-- 1 root root    84186 Sep 12 11:43 cts_ibex_core.sdc
+-rw-r--r-- 1 root root  2350675 Sep 12 11:43 floorplan_ibex_core.def
+-rw-r--r-- 1 root root  9057176 Sep 12 11:43 floorplan_ibex_core.odb
+-rw-r--r-- 1 root root 35607870 Sep 12 11:44 ibex_core.gds
+-rw-r--r-- 1 root root 17048640 Sep 12 11:44 ibex_core.klayout.gds
+-rw-r--r-- 1 root root 35607870 Sep 12 11:44 ibex_core.magic.gds
+-rw-r--r-- 1 root root 11336263 Sep 12 11:43 logs_placement_11-gpl_sta.log
+-rw-r--r-- 1 root root   144955 Sep 12 11:44 logs_placement_12-resizer.log
+-rw-r--r-- 1 root root 10716426 Sep 12 11:43 logs_placement_14-dpl_sta.log
+-rw-r--r-- 1 root root 10716426 Sep 12 11:44 logs_placement_15-ace_post_place_sta.log
+-rw-r--r-- 1 root root 11331059 Sep 12 11:44 logs_placement_8-gpl_sta.log
+-rw-r--r-- 1 root root  2509165 Sep 12 10:45 placement_area_util.rpt
+-rw-r--r-- 1 root root  2721366 Sep 12 11:43 placement_ibex_core.def
+-rw-r--r-- 1 root root  1923442 Sep 12 11:43 placement_ibex_core.nl.v
+-rw-r--r-- 1 root root  9203556 Sep 12 11:43 placement_ibex_core.odb
+-rw-r--r-- 1 root root  2820392 Sep 12 11:43 placement_ibex_core.pnl.v
+-rw-r--r-- 1 root root      300 Sep 12 10:45 placement_metrics_summary.rpt
+-rw-r--r-- 1 root root       97 Sep 12 10:45 placement_power_bundle.rpt
+-rw-r--r-- 1 root root       88 Sep 12 10:45 placement_timing_bundle.rpt
+-rw-r--r-- 1 root root 13917692 Sep 12 11:43 routing_ibex_core.def
+-rw-r--r-- 1 root root  2997678 Sep 12 11:43 routing_ibex_core.nl.v
+-rw-r--r-- 1 root root 27309932 Sep 12 11:43 routing_ibex_core.odb
+-rw-r--r-- 1 root root  5183722 Sep 12 11:43 routing_ibex_core.pnl.v
+-rw-r--r-- 1 root root 35607870 Sep 12 11:43 signoff_ibex_core.gds
+-rw-r--r-- 1 root root 17048640 Sep 12 11:43 signoff_ibex_core.klayout.gds
+-rw-r--r-- 1 root root 35607870 Sep 12 11:43 signoff_ibex_core.magic.gds
+-rw-r--r-- 1 root root  1728534 Sep 12 11:43 synthesis_ibex_core.v
+[pack_placement] STA_LOG=/data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/designs/ace_design/runs/ace_run/logs/placement/14-dpl_sta.log
+[pack_placement] DEF → placement_top.def (2721366 bytes)
+[pack_placement] ODB → placement_top.odb
+[pack_placement] curated results:
+-rw-r--r--    1 root     root         756 Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_area_util.rpt
+-rw-r--r--    1 root     root        1.8M Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_ibex_core.nl.v
+-rw-r--r--    1 root     root        8.8M Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_ibex_core.odb
+-rw-r--r--    1 root     root        2.7M Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_ibex_core.pnl.v
+-rw-r--r--    1 root     root        1.1K Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_metrics_summary.rpt
+-rw-r--r--    1 root     root        1.3K Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_power.rpt
+-rw-r--r--    1 root     root        1.1K Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_timing.rpt
+-rw-r--r--    1 root     root        2.6M Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_top.def
+-rw-r--r--    1 root     root        8.8M Sep 12 11:44 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_top.odb
+     1109 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_timing.rpt
+     1379 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_power.rpt
+      756 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_area_util.rpt
+     1095 /data/ace-openroad-jobs/owners/ibex_tapeout_run_1/jobs/ol_ibex_core_ibex_core_mty98xin/results/placement_metrics_summary.rpt
+     4339 total
+ACE-Seek: === placement metrics summary ===
+--- placement_metrics_summary.rpt ---
+worst slack corner Typical: 0.1829
+worst slack corner Typical: 1.6715
+tns 0.00
+wns 0.00
+worst slack 1.67
+worst slack 0.18
+wns 0.00
+tns 0.00
+worst slack 1.67
+worst slack 0.18
+Total                  1.53e-02   1.27e-02   6.18e-08   2.81e-02 100.0%
+Total                  1.53e-02   1.27e-02   6.18e-08   2.81e-02 100.0%
+Design area 127585 u^2 42% utilization.
+Design area 127585 u^2 42% utilization.  # 14-dpl_sta.log
+Design area 127585 u^2 42% utilization.  # 12-resizer.log
+Design area 127585 u^2 42% utilization.  # 15-ace_post_place_sta.log
+Design area 128125 u^2 42% utilization.  # 11-gpl_sta.log
+Design area 128125 u^2 42% utilization.  # 8-gpl_sta.log
+Design area 128125 u^2 42% utilization.  # logs_placement_11-gpl_sta.log
+Design area 127585 u^2 42% utilization.  # logs_placement_12-resizer.log
+Design area 127585 u^2 42% utilization.  # logs_placement_14-dpl_sta.log
+Design area 127585 u^2 42% utilization.  # logs_placement_15-ace_post_place_sta.log
+Design area 128125 u^2 42% utilization.  # logs_placement_8-gpl_sta.log
+--- placement_timing.rpt ---
+worst slack corner Typical: 0.1829
+worst slack corner Typical: 1.6715
+report_tns
+tns 0.00
+report_wns
+wns 0.00
+worst slack 1.67
+worst slack 0.18
+report_wns
+wns 0.00
+report_tns
+tns 0.00
+report_wns
+worst slack 1.67
+worst slack 0.18
+--- placement_power.rpt ---
+Group                  Internal  Switching    Leakage      Total
+Total                  1.53e-02   1.27e-02   6.18e-08   2.81e-02 100.0%
+Group                  Internal  Switching    Leakage      Total
+Total                  1.53e-02   1.27e-02   6.18e-08   2.81e-02 100.0%
+--- placement_area_util.rpt ---
+Design area 127585 u^2 42% utilization.
+Design area 127585 u^2 42% utilization.  # 14-dpl_sta.log
+Design area 127585 u^2 42% utilization.  # 12-resizer.log
+Design area 127585 u^2 42% utilization.  # 15-ace_post_place_sta.log
+Design area 128125 u^2 42% utilization.  # 11-gpl_sta.log
+Design area 128125 u^2 42% utilization.  # 8-gpl_sta.log
+Design area 128125 u^2 42% utilization.  # logs_placement_11-gpl_sta.log
+Design area 127585 u^2 42% utilization.  # logs_placement_12-resizer.log
+Design area 127585 u^2 42% utilization.  # logs_placement_14-dpl_sta.log
+Design area 127585 u^2 42% utilization.  # logs_placement_15-ace_post_place_sta.log
+Design area 128125 u^2 42% utilization.  # logs_placement_8-gpl_sta.log
+ACE-Seek: === end placement metrics ===
+[2026-09-12T11:44:23+00:00] SUCCESS gds=7 def=1 until=all rc=0

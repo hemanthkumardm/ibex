@@ -1,9 +1,26 @@
 # Ace-Seek placement metrics summary
-# Keys: wns tns power_w area_um2 util_pct
+# source=14-dpl_sta.log
 
-# area/util extract
-Design area 128125 u^2 42% utilization.
+worst slack corner Typical: 0.1829
+worst slack corner Typical: 1.6715
+tns 0.00
+wns 0.00
+worst slack 1.67
+worst slack 0.18
+wns 0.00
+tns 0.00
+worst slack 1.67
+worst slack 0.18
+Total                  1.53e-02   1.27e-02   6.18e-08   2.81e-02 100.0%
+Total                  1.53e-02   1.27e-02   6.18e-08   2.81e-02 100.0%
 Design area 127585 u^2 42% utilization.
-Design area 127585 u^2 42% utilization.
-Design area 127585 u^2 42% utilization.
-Design area 128125 u^2 42% utilization.
+Design area 127585 u^2 42% utilization.  # 14-dpl_sta.log
+Design area 127585 u^2 42% utilization.  # 12-resizer.log
+Design area 127585 u^2 42% utilization.  # 15-ace_post_place_sta.log
+Design area 128125 u^2 42% utilization.  # 11-gpl_sta.log
+Design area 128125 u^2 42% utilization.  # 8-gpl_sta.log
+Design area 128125 u^2 42% utilization.  # logs_placement_11-gpl_sta.log
+Design area 127585 u^2 42% utilization.  # logs_placement_12-resizer.log
+Design area 127585 u^2 42% utilization.  # logs_placement_14-dpl_sta.log
+Design area 127585 u^2 42% utilization.  # logs_placement_15-ace_post_place_sta.log
+Design area 128125 u^2 42% utilization.  # logs_placement_8-gpl_sta.log
