@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp / Cache files
+*.tmp
+*.bak
+*~
+__pycache__/
+*.pyc
+
+# Keep outputs/ and reports/ tracked
+!outputs/*.gds
+!outputs/*.def
+!outputs/*.spef
+!outputs/*.v
+!outputs/*.sdc
+!reports/**/*.rpt
+!reports/**/*.log
