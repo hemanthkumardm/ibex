@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source": "vlsi.ace-seek",
+  "source": "openroad-studio",
   "designName": "ibex_core",
   "pdk": "sky130",
   "topModule": "ibex_core",
@@ -8,28 +8,27 @@
   "files": [
     "ace-seek-flow.json",
     "constraints.sdc",
-    "Makefile",
-    "docker-run.sh",
     "rtl/ibex_core.v",
     "config/config.json",
     "config/constraints.sdc",
     "config/mmmc_corners.tcl",
-    "config/fastroute.tcl",
-    "scripts/helpers/reporting.tcl",
-    "scripts/helpers/pvt_corners.tcl",
-    "scripts/02_floorplan.tcl",
-    "scripts/03_placement.tcl",
-    "scripts/04_cts.tcl",
-    "scripts/05_routing.tcl",
-    "scripts/06_signoff.tcl",
-    "scripts/synth.ys",
-    "scripts/opensta.tcl",
-    "scripts/openroad.tcl",
-    "scripts/run_pipeline.sh",
-    "scripts/harvest_results.py"
+    "config/fastroute.tcl"
+  ],
+  "results": [
+    "outputs/final_ibex_core.gds",
+    "outputs/placement_top.def",
+    "outputs/final_ibex_core.v",
+    "outputs/final_ibex_core.nl.v",
+    "outputs/final_ibex_core.sdc",
+    "reports/02_floorplan/",
+    "reports/03_placement/",
+    "reports/04_cts/",
+    "reports/05_routing/",
+    "reports/06_signoff/",
+    "logs/run.log"
   ],
   "notes": [
-    "lowRISC Ibex RV32IMC Core OpenROAD Studio Physical Implementation Pack",
+    "lowRISC Ibex RV32IMC Core OpenROAD Studio Physical Implementation",
     "PDK: SkyWater 130nm High-Density (sky130_fd_sc_hd)",
     "Clock: 66.7 MHz (15.000 ns clock period)"
   ]
