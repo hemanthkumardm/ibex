@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "designName": "ibex_core",
+  "topModule": "ibex_core",
+  "pdk": "sky130",
+  "stages": [
+    "lint",
+    "simulation",
+    "synthesis",
+    "io_plan",
+    "floorplan",
+    "powerplan",
+    "placement",
+    "cts",
+    "route",
+    "drc",
+    "lvs",
+    "gds"
+  ],
+  "stageInputs": {
+    "lint": {
+      "LINT_TOP": "ibex_core",
+      "LINT_WALL": "true"
+    },
+    "simulation": {
+      "SIM_TB_TOP": "ibex_core_tb",
+      "SIM_TIMEOUT_CYCLES": "200"
+    },
+    "synthesis": {
+      "CLOCK_PORT": "clk_i",
+      "CLOCK_PERIOD": "15.0",
+      "SYNTH_NO_FLAT": "false",
+      "QUIT_ON_SYNTH_CHECKS": "false",
+      "SYNTH_STRATEGY": "AREA 0",
+      "SYNTH_BUFFERING": "true",
+      "SYNTH_SIZING": "false",
+      "SYNTH_CLOCK_UNCERTAINTY": "0.25",
+      "SYNTH_TIMING_DERATE": "0.05"
+    },
+    "io_plan": {
+      "IO_PLAN_JSON": "",
+      "IO_USE_PIN_ORDER": "true"
+    },
+    "floorplan": {
+      "FP_SIZING": "relative",
+      "DIE_AREA": "0 0 553.84 552.16",
+      "CORE_AREA": "20 20 533.84 532.16",
+      "FP_CORE_UTIL": "40",
+      "FP_ASPECT_RATIO": "1",
+      "FP_CORE_MARGIN": "20",
+      "FP_IO_MIN_DISTANCE": "3",
+      "FP_IO_HLENGTH": "4",
+      "FP_IO_VLENGTH": "4"
+    },
+    "powerplan": {
+      "FP_PDN_MULTILAYER": "true",
+      "FP_PDN_VWIDTH": "1.6",
+      "FP_PDN_HWIDTH": "1.6",
+      "FP_PDN_VSPACING": "1.7",
+      "FP_PDN_HSPACING": "1.7"
+    },
+    "placement": {
+      "PL_TARGET_DENSITY": "0.45",
+      "CELL_PAD": "4",
+      "PL_BASIC_PLACEMENT": "false",
+      "PL_ROUTABILITY_DRIVEN": "true",
+      "PL_TIMING_DRIVEN": "true",
+      "PL_RESIZER_TIMING_OPTIMIZATIONS": "true",
+      "GLB_RESIZER_TIMING_OPTIMIZATIONS": "true",
+      "PL_RESIZER_HOLD_SLACK_MARGIN": "0.1",
+      "GLB_RESIZER_HOLD_SLACK_MARGIN": "0.1"
+    },
+    "cts": {
+      "CLOCK_TREE_SYNTH": "true",
+      "CTS_ROOT_BUFFER": "sky130_fd_sc_hd__clkbuf_16",
+      "CTS_CLK_BUFFER_LIST": "sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_2",
+      "CTS_MAX_CAP": "1.5"
+    },
+    "route": {
+      "ROUTING_STRATEGY": "0",
+      "GLB_RT_ADJUSTMENT": "0",
+      "DIODE_INSERTION_STRATEGY": "3"
+    },
+    "drc": {
+      "MAGIC_DRC_USE_GDS": "true",
+      "KLAYOUT_DRC": "false"
+    },
+    "lvs": {
+      "NETGEN_LVS": "true",
+      "MAGIC_EXT_USE_GDS": "true"
+    },
+    "gds": {
+      "MAGIC_GENERATE_GDS": "true",
+      "KLAYOUT_GENERATE_GDS": "true"
+    }
+  },
+  "completedStages": [
+    "lint",
+    "simulation",
+    "synthesis",
+    "io_plan",
+    "floorplan",
+    "powerplan",
+    "placement",
+    "cts",
+    "route",
+    "drc",
+    "lvs",
+    "gds"
+  ],
+  "notes": [
+    "OpenROAD Studio full physical design configuration for lowRISC Ibex RV32IMC",
+    "Targeting SkyWater 130nm High-Density (sky130_fd_sc_hd)",
+    "Hardware metrics: 66.7 MHz (15.0 ns period), 128,125 um2 cell area, 41.9% die util / 48.7% core util"
+  ]
+}

@@ -1,133 +1,131 @@
-# Ibex RISC-V RV32IMC Silicon Tapeout on SkyWater 130nm
+# lowRISC Ibex RISC-V RV32IMC — OpenROAD Studio Physical Implementation
 
 [![PDK](https://img.shields.io/badge/PDK-SkyWater%20130nm%20(SKY130A)-blue.svg)](https://github.com/google/skywater-pdk)
 [![Core](https://img.shields.io/badge/Core-lowRISC%20Ibex%20RV32IMC-orange.svg)](https://github.com/lowRISC/ibex)
+[![Studio](https://img.shields.io/badge/Studio-OpenROAD%20Studio%20%7C%20Ace--Seek-emerald.svg)](https://openroad.ace-seek.com)
 [![Flow](https://img.shields.io/badge/Flow-OpenLane%20%7C%20OpenROAD-success.svg)](https://theopenroadproject.org/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg)](LICENSE)
 
-An end-to-end, fully reproducible, silicon-ready physical implementation of the production **lowRISC Ibex RISC-V CPU core** (RV32IMC) targeting the open-source **SkyWater 130nm High-Density standard cell library** (`sky130_fd_sc_hd`) using the **OpenLane / OpenROAD** toolchain.
+An OpenROAD Studio physical implementation and silicon tapeout pack for the **lowRISC Ibex 32-bit RISC-V CPU core** (RV32IMC specification) targeting the open-source **SkyWater 130nm High-Density CMOS PDK** (`sky130_fd_sc_hd`).
+
+This repository contains the complete OpenROAD Studio project configuration, synthesizable RTL, SDC constraints, automated stage reports, and tapeout deliverables (GDSII, DEF, gate-level netlists).
 
 ---
 
-## Architectural Overview
+## Physical Design Summary
 
-The **Ibex RISC-V Core** is a 2-stage, in-order 32-bit processor developed by lowRISC, featuring:
-* **ISA Support:** RV32I base integer instruction set with `M` (hardware multiplier/divider) and `C` (compressed instructions) extensions.
-* **Pipeline:** 2-stage execution pipeline (Instruction Fetch, Instruction Decode/Execute/Writeback) with dynamic branch hazard mitigation.
-* **Protection & Security:** Physical Memory Protection (PMP) with configurable privilege modes (Machine & User).
-* **Control/Status:** Full RISC-V CSR implementation conforming to privileged architecture v1.11.
-
-```mermaid
-graph LR
-    subgraph Frontend [Instruction Fetch Stage]
-        IF_STAGE[Instruction Fetch] --> IF_BUF[Prefetch Buffer]
-        IF_BUF --> COMP_DEC[Compressed Decoder]
-    end
-
-    subgraph Backend [Execute & Writeback Stage]
-        DEC[Instruction Decoder] --> REGFILE[Register File (32x32)]
-        REGFILE --> ALU[ALU & Bit Manipulation]
-        REGFILE --> MULDIV[Fast Multiplier / Divider]
-        ALU --> WB[Writeback Mux]
-        MULDIV --> WB
-    end
-
-    subgraph Security [Memory & Protection]
-        CSR[CSR Registers] --> PMP[Physical Memory Protection]
-        PMP --> LSU[Load-Store Unit]
-    end
-
-    COMP_DEC --> DEC
-    WB --> REGFILE
-```
+| Parameter | Specification / Result | Status |
+| :--- | :--- | :--- |
+| **Foundry & Node** | SkyWater 130nm High-Density (`sky130A`) | Validated |
+| **Standard Cell Library** | `sky130_fd_sc_hd` (7-track standard cells) | Validated |
+| **Target Clock Frequency** | **66.7 MHz** ($T_{clk} = 15.000\,\text{ns}$) | **Target Met** |
+| **Die Dimensions** | **553.84 μm × 552.16 μm** ($305,808\,\mu\text{m}^2$) | Optimal |
+| **Core Dimensions** | **513.84 μm × 512.16 μm** ($263,168\,\mu\text{m}^2$) | 20 μm margin |
+| **Standard Cell Area** | **128,125 μm²** | Optimal |
+| **Die Utilization** | **41.9%** (OpenROAD floorplan metric: 42%) | Optimal |
+| **Core Utilization** | **48.7%** (Standard cell / core area) | Optimal |
+| **Routing Layers** | 5 Metal Layers (`li1`, `met1`, `met2`, `met3`, `met4`, `met5`) | Complete |
+| **Diode Strategy** | Diode insertion strategy 3 + port protection | Antenna Clean |
+| **Physical Verification** | Magic DRC & Netgen LVS | Passed |
 
 ---
 
-## Physical Design Methodology
+## OpenROAD Studio Stage Status
 
-| Metric | Target Specification |
-| :--- | :--- |
-| **Process Node** | SkyWater 130nm CMOS (`sky130A`) |
-| **Standard Cell Library** | `sky130_fd_sc_hd` (7-track High Density) |
-| **Target Clock Frequency** | **66.7 MHz** ($T_{clk} = 15.000\,\text{ns}$) |
-| **Target Core Utilization** | 40% (Square aspect ratio 1.0, 20 $\mu\text{m}$ margin) |
-| **Metal Stack** | 5 Metal Layers (`li1`, `met1`, `met2`, `met3`, `met4`, `met5`) |
-| **Clock Distribution** | TritonCTS balanced H-tree with root buffer tree |
-| **Antenna Protection** | Diode insertion strategy 3 + port protection |
-| **Physical Signoff** | Magic DRC clean, Netgen LVS match, multi-corner OpenSTA |
-
----
-
-## Directory Hierarchy
+The physical design flow was executed through all 12 stages tracked in `ace-seek-flow.json`:
 
 ```text
-ibex-sky130-openroad-tapeout/
-├── README.md                      # Comprehensive project documentation
-├── config/
-│   ├── config.json                # OpenLane flow configuration
-│   ├── constraints.sdc            # SDC timing constraints (66.7 MHz target)
-│   ├── fastroute.tcl              # Global routing layer assignment
-│   └── mmmc_corners.tcl           # Multi-corner STA configuration
+[✓] 01. Lint         — Verilator syntax and semantic linting
+[✓] 02. Simulation   — Icarus Verilog functional testbench execution
+[✓] 03. Synthesis    — Yosys logic synthesis & ABC technology mapping (AREA 0)
+[✓] 04. IO Planner   — Boundary pin placement across metal 2 / metal 3
+[✓] 05. Floorplan    — Die/core boundary sizing (553.84 x 552.16 um) & tap insertion
+[✓] 06. Powerplan    — Dual-layer PDN power grid & strap generation
+[✓] 07. Placement    — Global placement, detailed placement, and timing optimization
+[✓] 08. CTS          — TritonCTS balanced clock tree buffer insertion
+[✓] 09. Route        — FastRoute global routing & TritonRoute detailed routing
+[✓] 10. DRC          — Magic full-mask design rule checking
+[✓] 11. LVS          — Netgen device and netlist correspondence verification
+[✓] 12. GDS          — Mask stream generation via Magic and KLayout
+```
+
+---
+
+## Project Structure
+
+```text
+├── ace-seek-flow.json         # OpenROAD Studio flow configuration & stage parameters
+├── ace-seek-openroad.json     # OpenROAD Studio project manifest
+├── constraints.sdc            # Primary SDC timing constraints (66.7 MHz / 15.0 ns)
+├── Makefile                   # Flow execution targets (synth, sta, pnr, pipeline)
+├── docker-run.sh              # Containerized local execution helper
 ├── rtl/
-│   └── ibex_core.v                # Synthesizable AST-hardened SystemVerilog core
-├── outputs/                       # Signoff deliverables (GDSII, DEF, SPEF)
-│   ├── ibex_core.gds              # Final mask GDSII stream file
-│   ├── ibex_core.def              # Final routed design exchange format
-│   └── ibex_core.spef             # Parasitic resistance/capacitance extraction
-├── reports/                       # Stage reports (synthesis through signoff)
-│   ├── 01_synthesis/              # Cell count, area, logic optimization
-│   ├── 02_floorplan/              # Die dimensions, pin placement, PDN IR drop
-│   ├── 03_placement/              # Density heatmaps, wirelength estimates
-│   ├── 04_cts/                    # Clock skew, insertion delay, buffer count
-│   ├── 05_routing/                # DRC clean detailed routing, antenna reports
-│   └── 06_signoff/                # Multi-corner STA (WNS/TNS), Magic DRC, Netgen LVS
-├── docs/
-│   ├── IBEX_TIMING_CLOSURE_REPORT.md  # Detailed technical silicon report
-│   └── WALKTHROUGH_VIDEO_SCRIPT.md    # 4-5 min narration walkthrough script
-└── scripts/
-    └── run_pipeline.sh            # Parameterized reproduction script
+│   └── ibex_core.v            # lowRISC synthesizable RV32IMC top module
+├── config/
+│   ├── config.json            # OpenLane physical design configuration
+│   ├── constraints.sdc        # Base timing constraints
+│   ├── fastroute.tcl          # Global routing layer assignment
+│   └── mmmc_corners.tcl       # Multi-corner STA PVT configuration
+├── outputs/                   # Physical signoff deliverables
+│   ├── final_ibex_core.gds    # Signoff GDSII mask stream (35.6 MB)
+│   ├── placement_top.def      # Placed design exchange format (DEF)
+│   ├── final_ibex_core.v      # Final gate-level netlist
+│   ├── final_ibex_core.nl.v   # Powered gate-level netlist
+│   ├── final_ibex_core.sdc    # Signoff timing constraints
+│   ├── signoff_ibex_core.gds  # Signoff mask stream
+│   ├── signoff_ibex_core.magic.gds
+│   └── signoff_ibex_core.klayout.gds
+├── reports/                   # Tool-generated reports across stages
+│   ├── 02_floorplan/          # Floorplan ODB, IO, tapcell, and PDN logs
+│   ├── 03_placement/          # Timing bundle, power bundle, and area utilization reports
+│   ├── 04_cts/                # Clock tree synthesis database
+│   ├── 05_routing/            # Post-routing physical database
+│   └── 06_signoff/            # Signoff run metadata
+├── logs/                      # Execution logs
+│   ├── run.log                # Primary pipeline log
+│   └── ol_ibex_core_ibex_core_mty98xin.log
+└── scripts/                   # Tool and flow scripts
+    ├── run_pipeline.sh        # Parameterized reproduction script
+    ├── harvest_results.py     # Automated report and artifact harvester
+    ├── synth.ys               # Yosys synthesis script
+    ├── opensta.tcl            # OpenSTA static timing analysis script
+    └── openroad.tcl           # OpenROAD PnR script
 ```
 
 ---
 
-## Reproduction & Pipeline Execution
+## Reproduction
 
-To run the complete physical design flow against any OpenROAD/OpenLane runner:
+### Option A: Open in OpenROAD Studio (Web)
+1. Navigate to [openroad.ace-seek.com](https://openroad.ace-seek.com)
+2. Open the **Project** tab and import this repository or upload a zip export
+3. All stage configurations and inputs will automatically populate from `ace-seek-flow.json`
 
+### Option B: Run via Makefile
 ```bash
-# 1. Clone the repository
-git clone https://github.com/hemanthkumardm/ibex-sky130-openroad-tapeout.git
-cd ibex-sky130-openroad-tapeout
+# Run synthesis and OpenSTA timing checks
+make all
 
-# 2. Configure the runner endpoint
-export OPENROAD_RUNNER_URL="http://your-openroad-host:3000"
-export OPENROAD_API_KEY="your-api-key"
-
-# 3. Execute the automated tapeout flow
-./scripts/run_pipeline.sh
+# Run full physical design flow via pipeline script
+make pipeline
 ```
 
-The script streams live execution logs across all 37 OpenLane stages and downloads all verified deliverables into `outputs/` and `reports/`.
+### Option C: Run in Container
+```bash
+# Uses official OpenLane/OpenROAD container
+./docker-run.sh
+```
 
----
-
-## Physical Signoff Verification
-
-1. **Multi-Corner Static Timing Analysis (OpenSTA):**
-   * Slow-Worst corner (`1.60V`, `100°C`, slow models)
-   * Typical corner (`1.80V`, `25°C`, typical models)
-   * Fast-Best corner (`1.95V`, `-40°C`, fast models)
-   * Setup & Hold slacks closed with zero violations at 66.7 MHz.
-
-2. **Design Rule Checking (Magic):**
-   * Manufacturing rule checks (DRC) against SkyWater SKY130 design manual. Zero DRC violations.
-
-3. **Layout Versus Schematic (Netgen LVS):**
-   * SPICE netlist extracted from final layout geometry compared with synthesized structural gate netlist. Circuits match uniquely with 100% pin correspondence.
+### Option D: Run with Custom Runner
+```bash
+export OPENROAD_RUNNER_URL="http://<your-runner-ip>"
+export OPENROAD_OWNER_ID="ibex_tapeout_run_1"
+bash scripts/run_pipeline.sh
+```
 
 ---
 
 ## License
 
-* **Hardware Design (Ibex):** Apache License 2.0 (lowRISC contributors)
-* **Physical Design Flow & Scripts:** Apache License 2.0 (Ace-Seek Team)
+* **Hardware Design (Ibex Core):** Copyright lowRISC contributors. Licensed under the Apache License, Version 2.0.
+* **Flow Scripts & Configurations:** Apache 2.0.

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "source": "vlsi.ace-seek",
+  "designName": "ibex_core",
+  "pdk": "sky130",
+  "topModule": "ibex_core",
+  "createdAt": "2026-09-12T19:30:00.000Z",
+  "files": [
+    "ace-seek-flow.json",
+    "constraints.sdc",
+    "Makefile",
+    "docker-run.sh",
+    "rtl/ibex_core.v",
+    "config/config.json",
+    "config/constraints.sdc",
+    "config/mmmc_corners.tcl",
+    "config/fastroute.tcl",
+    "scripts/run_pipeline.sh",
+    "scripts/harvest_results.py",
+    "scripts/synth.ys",
+    "scripts/opensta.tcl",
+    "scripts/openroad.tcl"
+  ],
+  "notes": [
+    "lowRISC Ibex RV32IMC Core OpenROAD Studio Physical Implementation Pack",
+    "PDK: SkyWater 130nm High-Density (sky130_fd_sc_hd)",
+    "Clock: 66.7 MHz (15.000 ns clock period)"
+  ]
+}

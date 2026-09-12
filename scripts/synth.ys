@@ -1,0 +1,8 @@
+# Yosys synthesis script for ibex_core (OpenROAD Studio)
+read_verilog rtl/ibex_core.v
+hierarchy -check -top ibex_core
+proc; opt; fsm; opt; memory; opt
+techmap; opt
+abc -liberty sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+clean
+write_verilog outputs/synthesis_ibex_core.v
