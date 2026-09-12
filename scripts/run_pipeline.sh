@@ -17,6 +17,8 @@ set -euo pipefail
 RUNNER_URL="${OPENROAD_RUNNER_URL:-http://localhost:3000}"
 API_KEY="${OPENROAD_API_KEY:-ace_max_usr_test_123}"
 OWNER_ID="${OPENROAD_OWNER_ID:-ibex_prod_tapeout}"
+# untilStage: synthesis | floorplan | placement | cts | routing | gds | all
+UNTIL_STAGE="${OPENROAD_UNTIL_STAGE:-all}"
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RTL_FILE="$REPO_ROOT/rtl/ibex_core.v"
@@ -53,6 +55,13 @@ import urllib.request
 import urllib.error
 
 runner_url = os.environ.get("RUNNER_URL", "http://localhost:3000").rstrip("/")
+# Map HTTP status to a readable error instead of a bare traceback
+
+def http_error_body(e):
+    try:
+        return e.read().decode()
+    except Exception:
+        return ""
 api_key = os.environ.get("API_KEY", "")
 owner_id = os.environ.get("OWNER_ID", "ibex_prod_tapeout")
 rtl_file = "$RTL_FILE"
@@ -69,7 +78,7 @@ with open(sdc_file, "r") as f:
 
 payload = {
     "mode": "container",
-    "untilStage": "all",
+    "untilStage": "$UNTIL_STAGE",
     "openlaneConfig": {
         "CLOCK_PORT": "clk_i",
         "CLOCK_NET": "clk_i",
@@ -112,7 +121,7 @@ try:
     with urllib.request.urlopen(req) as resp:
         res = json.loads(resp.read().decode())
 except urllib.error.HTTPError as e:
-    print(f"[-] HTTP Error {e.code}: {e.read().decode()}")
+    print(f"[-] HTTP Error {e.code}: {http_error_body(e)}")
     sys.exit(1)
 
 job_id = res["result"]["jobId"]
@@ -129,7 +138,7 @@ while True:
         with urllib.request.urlopen(p_req) as resp:
             data = json.loads(resp.read().decode())["result"]
     except urllib.error.HTTPError as e:
-        print(f"[-] Polling error {e.code}: {e.read().decode()}")
+        print(f"[-] Polling error {e.code}: {http_error_body(e)[:300]}")
         continue
 
     status = data.get("status")

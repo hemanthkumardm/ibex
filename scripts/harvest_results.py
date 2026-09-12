@@ -16,6 +16,23 @@ API_KEY = os.environ.get("OPENROAD_API_KEY", "ace_max_usr_test_123")
 OWNER_ID = os.environ.get("OPENROAD_OWNER_ID", "ibex_tapeout_run_1")
 JOB_ID = os.environ.get("JOB_ID", "ol_ibex_core_ibex_core_mty98xin")
 
+# Artifact filename stem → reports/NN_<stage>/ folder (harvest tiering)
+STAGE_DIRS = [
+    ("synthesis", "01_synthesis"),
+    ("floorplan", "02_floorplan"),
+    ("placement", "03_placement"),
+    ("cts", "04_cts"),
+    ("routing", "05_routing"),
+]
+
+def report_dir_for(name):
+    low = name.lower()
+    # check cts before ... 'rout*cts' does not occur; order matters for overlap
+    for stem, folder in STAGE_DIRS:
+        if stem in low:
+            return folder
+    return "06_signoff"
+
 headers = {
     "x-api-key": API_KEY,
     "x-openroad-owner": OWNER_ID
@@ -52,18 +69,8 @@ for art in artifacts:
     # Sort into outputs or reports
     if any(name.endswith(ext) for ext in [".gds", ".gds.gz", ".def", ".spef", ".v", ".sdc"]):
         dest = os.path.join(OUTPUTS_DIR, name)
-    elif "synthesis" in name:
-        dest = os.path.join(REPORTS_DIR, "01_synthesis", name)
-    elif "floorplan" in name:
-        dest = os.path.join(REPORTS_DIR, "02_floorplan", name)
-    elif "placement" in name:
-        dest = os.path.join(REPORTS_DIR, "03_placement", name)
-    elif "cts" in name:
-        dest = os.path.join(REPORTS_DIR, "04_cts", name)
-    elif "routing" in name:
-        dest = os.path.join(REPORTS_DIR, "05_routing", name)
     else:
-        dest = os.path.join(REPORTS_DIR, "06_signoff", name)
+        dest = os.path.join(REPORTS_DIR, report_dir_for(name), name)
         
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     try:
