@@ -54,12 +54,16 @@ In OpenROAD Studio, user repositories contain design specifications and the resu
 │   ├── signoff_ibex_core.magic.gds
 │   └── signoff_ibex_core.klayout.gds
 ├── reports/                   # Results: Tool-generated stage reports
-│   ├── 02_floorplan/          # Floorplan ODB, IO, tapcell, and PDN logs
+│   ├── 02_floorplan/          # Floorplan database (ODB)
 │   ├── 03_placement/          # Post-place STA, power, and area utilization reports
 │   ├── 04_cts/                # Clock tree synthesis database
 │   ├── 05_routing/            # Detailed routing physical database
 │   └── 06_signoff/            # Signoff run metadata
-└── logs/                      # Results: Platform execution logs
+└── logs/                      # Results: EDA tool execution logs
+    ├── 02_floorplan/          # Floorplan sub-step logs
+    │   ├── 4-io.log           # IO pin placement engine log (OpenROAD)
+    │   ├── 5-tap.log          # Welltap/decap insertion log
+    │   └── 6-pdn.log          # Power distribution network (PDN) log
     ├── run.log                # Master pipeline log
     └── ol_ibex_core_ibex_core_mty98xin.log
 ```

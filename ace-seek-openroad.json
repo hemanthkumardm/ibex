@@ -25,7 +25,7 @@
     "reports/04_cts/",
     "reports/05_routing/",
     "reports/06_signoff/",
-    "logs/run.log"
+    "logs/"
   ],
   "notes": [
     "lowRISC Ibex RV32IMC Core OpenROAD Studio Physical Implementation",
