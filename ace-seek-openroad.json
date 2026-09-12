@@ -15,11 +15,18 @@
     "config/constraints.sdc",
     "config/mmmc_corners.tcl",
     "config/fastroute.tcl",
-    "scripts/run_pipeline.sh",
-    "scripts/harvest_results.py",
+    "scripts/helpers/reporting.tcl",
+    "scripts/helpers/pvt_corners.tcl",
+    "scripts/02_floorplan.tcl",
+    "scripts/03_placement.tcl",
+    "scripts/04_cts.tcl",
+    "scripts/05_routing.tcl",
+    "scripts/06_signoff.tcl",
     "scripts/synth.ys",
     "scripts/opensta.tcl",
-    "scripts/openroad.tcl"
+    "scripts/openroad.tcl",
+    "scripts/run_pipeline.sh",
+    "scripts/harvest_results.py"
   ],
   "notes": [
     "lowRISC Ibex RV32IMC Core OpenROAD Studio Physical Implementation Pack",
